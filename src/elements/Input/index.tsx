@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./_input.scss";
-
 export interface InputProps
     extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
     labelContent?: string;
