@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
+import {CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 import moment from "moment";
 import Message from "elements/Message";
 
@@ -19,6 +19,15 @@ export type ChartProps = {
 
 
 const Chart: React.FunctionComponent<ChartProps> = (props) => {
+    const [mean, setMean] = useState<number>(0);
+
+    useEffect(() => {
+        if (props.items) {
+            const sum = props.items.reduce((prev, next) => prev + +next.open, 0)
+            setMean(sum / props.items.length);
+        }
+    }, [props.items])
+
     return <ResponsiveContainer className={props.classNames ?? props.classNames} width="60%"
                                 height={500}>
         {props.items && props.items.length > 0 ?
@@ -32,7 +41,8 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
                 <XAxis dataKey="date" tick={{fontSize: 12}} tickFormatter={(date) => moment(date).format(defaultDateFormat)}/>
                 <YAxis tick={{fontSize: 12}} tickFormatter={(value) => "$" + value}/>
                 <Tooltip/>
-                <Line type="monotone" dataKey="open" stroke="#8884d8"/>
+                <Line type="monotone" dataKey="open" stroke="#0099ff"/>
+                <ReferenceLine y={mean} stroke="#ff8533" strokeDasharray="10"/>
             </LineChart> : <div className={"message-container"}> <Message type="is-dark" header="No loaded data" body="Search for a stock and select date range to display data" /></div> }
     </ResponsiveContainer>;
 }
