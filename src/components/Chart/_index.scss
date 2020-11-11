@@ -1,0 +1,13 @@
+.stock-chart {
+  display: table;
+
+  .message-container {
+    display: table-cell;
+    vertical-align: middle;
+
+    .message {
+      width: fit-content;
+      margin: auto;
+    }
+  }
+}
