@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/stock-watcher/static/css/main.6709f2d3.chunk.css",
-    "main.js": "/stock-watcher/static/js/main.829285e9.chunk.js",
-    "main.js.map": "/stock-watcher/static/js/main.829285e9.chunk.js.map",
-    "runtime-main.js": "/stock-watcher/static/js/runtime-main.c7aea58f.js",
-    "runtime-main.js.map": "/stock-watcher/static/js/runtime-main.c7aea58f.js.map",
+    "main.css": "/stock-watcher/static/css/main.69728294.chunk.css",
+    "main.js": "/stock-watcher/static/js/main.4d88416c.chunk.js",
+    "main.js.map": "/stock-watcher/static/js/main.4d88416c.chunk.js.map",
+    "runtime-main.js": "/stock-watcher/static/js/runtime-main.f9a9f737.js",
+    "runtime-main.js.map": "/stock-watcher/static/js/runtime-main.f9a9f737.js.map",
     "static/css/2.06382735.chunk.css": "/stock-watcher/static/css/2.06382735.chunk.css",
-    "static/js/2.39486545.chunk.js": "/stock-watcher/static/js/2.39486545.chunk.js",
-    "static/js/2.39486545.chunk.js.map": "/stock-watcher/static/js/2.39486545.chunk.js.map",
-    "static/js/3.d98af017.chunk.js": "/stock-watcher/static/js/3.d98af017.chunk.js",
-    "static/js/3.d98af017.chunk.js.map": "/stock-watcher/static/js/3.d98af017.chunk.js.map",
+    "static/js/2.1dac701b.chunk.js": "/stock-watcher/static/js/2.1dac701b.chunk.js",
+    "static/js/2.1dac701b.chunk.js.map": "/stock-watcher/static/js/2.1dac701b.chunk.js.map",
+    "static/js/3.7799548f.chunk.js": "/stock-watcher/static/js/3.7799548f.chunk.js",
+    "static/js/3.7799548f.chunk.js.map": "/stock-watcher/static/js/3.7799548f.chunk.js.map",
     "index.html": "/stock-watcher/index.html",
     "static/css/2.06382735.chunk.css.map": "/stock-watcher/static/css/2.06382735.chunk.css.map",
-    "static/css/main.6709f2d3.chunk.css.map": "/stock-watcher/static/css/main.6709f2d3.chunk.css.map",
-    "static/js/2.39486545.chunk.js.LICENSE.txt": "/stock-watcher/static/js/2.39486545.chunk.js.LICENSE.txt"
+    "static/css/main.69728294.chunk.css.map": "/stock-watcher/static/css/main.69728294.chunk.css.map",
+    "static/js/2.1dac701b.chunk.js.LICENSE.txt": "/stock-watcher/static/js/2.1dac701b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.c7aea58f.js",
+    "static/js/runtime-main.f9a9f737.js",
     "static/css/2.06382735.chunk.css",
-    "static/js/2.39486545.chunk.js",
-    "static/css/main.6709f2d3.chunk.css",
-    "static/js/main.829285e9.chunk.js"
+    "static/js/2.1dac701b.chunk.js",
+    "static/css/main.69728294.chunk.css",
+    "static/js/main.4d88416c.chunk.js"
   ]
 }
