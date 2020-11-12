@@ -41,7 +41,7 @@ const SearchForm: React.FunctionComponent<SearchFormProps> = (props) => {
         <Field isGrouped className="search--form">
             <InputWithSuggestions
                 placeholder="Type ticker or company name"
-                inputClassName="search--form__search--input"
+                inputClassName="search--form__search--input is-info"
                 id="test"
                 onChange={handleOnChange}
                 onChoose={(value: string) => setValue(value)}

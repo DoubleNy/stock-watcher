@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./_index.scss";
+
 export interface InputProps
     extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
     inputClassName?: string;
@@ -14,7 +16,7 @@ const Input: React.FunctionComponent<InputProps> = (props) => {
     } = props;
 
     const getInputClassNames = () => {
-        let classNames = "input";
+        let classNames = "input ";
 
         if (inputClassName) {
             classNames += ` ${inputClassName}`;
@@ -23,7 +25,7 @@ const Input: React.FunctionComponent<InputProps> = (props) => {
         return classNames;
     };
 
-    return <input id={id} className={getInputClassNames()} {...inputProps} />
+    return <input id={id} className={getInputClassNames()} autoComplete={"off"} {...inputProps} />
 
 };
 

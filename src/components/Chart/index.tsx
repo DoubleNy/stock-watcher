@@ -45,9 +45,9 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
                 <Tooltip/>
                 <Line type="monotone" dataKey="open" stroke="#0099ff"/>
                 {props.showAverage && <ReferenceLine y={mean} stroke="#ff8533" strokeDasharray="10"/>}
-            </LineChart> : <div className="feedback"><Message type="is-dark" header="No loaded data"
+            </LineChart> : <Message type="is-dark" header="No loaded data"
                                                                          body="Search for a stock and select date range to display data"/>
-            </div>}
+            }
     </ResponsiveContainer>
 }
 

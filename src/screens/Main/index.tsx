@@ -24,14 +24,11 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
     const [allItems, setAllItems] = useState<Item[]>([]);
     const [filteredItems, setFilteredItems] = useState<Item[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [initalRange, setInitialRange] = useState<Range>();
+    const [range, setRange] = useState<Range>();
     const [showAverage, setShowAverage] = useState<boolean>(false);
 
     useEffect(() => {
-        const initialRange = getInitialRange();
-        setInitialRange(initialRange);
-        handleUpdateRange(initialRange);
-
+        handleUpdateRange(range ?? getInitialRange());
         setIsLoading(false);
     }, [allItems])
 
@@ -40,6 +37,7 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
             return new Date(el.date) > range.startDate! && new Date(el.date) < range.endDate!
         })
 
+        setRange(range);
         setFilteredItems(filteredItems);
     }
 
@@ -79,7 +77,7 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
         } else {
             console.log("API CALL ERROR");
             console.log("Status: " + status);
-            console.log("Body: " + {...data});
+            console.log(data);
         }
     };
 
@@ -88,7 +86,7 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
         <div className={"main--container"}>
             <Chart classNames={"main--container__chart"} items={filteredItems} showAverage={showAverage}/>
             <div className="main--container__configurations">
-                <RangeDatePicker onChangeRange={handleUpdateRange} initialRange={initalRange}/>
+                <RangeDatePicker onChangeRange={handleUpdateRange} initialRange={range}/>
                 <Toggle classNames="average--price" type="is-info" onToggle={handleDisplayAverage} isRounded/>
             </div>
         </div>

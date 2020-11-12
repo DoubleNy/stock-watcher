@@ -26,6 +26,7 @@ const dateRangeKey = {
 
 const RangeDatePicker: React.FunctionComponent<RangeDatePickerProps> = (props) => {
     const [range, setRange] = useState<Range>(props.initialRange ? {...props.initialRange, ...dateRangeKey} : {...defaultRange, ...dateRangeKey});
+    const [today] = useState(new Date());
 
     useEffect(() => {
 
@@ -43,6 +44,7 @@ const RangeDatePicker: React.FunctionComponent<RangeDatePickerProps> = (props) =
 
     return (
         <DateRange
+            maxDate={today}
             ranges={[range]}
             onChange={handleSelect}
         />
