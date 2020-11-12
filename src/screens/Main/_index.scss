@@ -7,6 +7,7 @@
     margin: 2rem auto;
 
     .average--price {
+      padding-top: 2.5rem;
       width: fit-content;
       margin: auto;
     }
@@ -14,6 +15,10 @@
     .rdrCalendarWrapper {
       height: 45vh;
       background: none !important;
+
+      .rdrDayDisabled {
+        background: none !important;
+      }
     }
   }
 }

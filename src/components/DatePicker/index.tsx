@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {DateRange} from 'react-date-range';
+import {DateRangePicker} from 'react-date-range';
 
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
@@ -43,7 +43,7 @@ const RangeDatePicker: React.FunctionComponent<RangeDatePickerProps> = (props) =
     }
 
     return (
-        <DateRange
+        <DateRangePicker
             maxDate={today}
             ranges={[range]}
             onChange={handleSelect}
