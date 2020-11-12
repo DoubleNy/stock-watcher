@@ -9,6 +9,7 @@ const API_KEY: string = "TCVWRTR5D693E1AT";
 export const defaultDateFormat = "DD/MM/YYYY";
 
 export const getAlphaVantageUrl = (value: string) =>`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${value}&outputsize=full&apikey=${API_KEY}`;
+export const getSearchSugesstions = (value: string) =>`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${value}&apikey=${API_KEY}`;
 
 export const getInitialRange = () : Range => {
     const today: Date = new Date();
@@ -22,4 +23,7 @@ export const getInitialRange = () : Range => {
 export const trimName = (name: string) => {
     const startIdx = name.indexOf(" ") + 1;
     return name.slice(startIdx);
+}
+export type StringMap = {
+    [key: string]: string;
 }

@@ -1,0 +1,49 @@
+.box.suggestions {
+  padding: 0;
+  border: 1px dotted #3273dc;
+  border-top: 1px solid rgba(10, 10, 10, 0.1);
+  margin-top: -1px;
+  position: absolute;
+  width: 20rem;
+  box-shadow: 0px 8px 7px rgba(10, 10, 10, 0.1);
+  z-index: 10;
+
+  &.suggestions {
+    margin-bottom: 0;
+  }
+
+  &:empty {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  > .suggestion {
+    padding: 0.3em;
+    cursor: pointer;
+
+    .suggestion--symbol {
+      font-weight: bold;
+    }
+
+    .suggestion--name {
+      font-weight: lighter;
+      font-size: 14px;
+      float: right;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: rgba(10, 10, 10, 0.1);
+    }
+
+    &:only-child,
+    &:last-child {
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+
+    &:last-child {
+      margin-bottom: -1px;
+    }
+  }
+}

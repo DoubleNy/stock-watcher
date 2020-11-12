@@ -1,9 +1,14 @@
-.field {
+.search--form {
   width: 30vw;
   margin: 2rem auto;
 
-  .search-button {
-    height: auto;
+  & &__search--input {
+    height: 3rem;
+    width: 20rem;
+  }
+
+  & &__search--button {
+    height: 3rem;
     margin-left: 0.5rem;
   }
 }

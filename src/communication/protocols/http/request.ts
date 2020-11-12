@@ -7,7 +7,7 @@ export type HttpResponse<T> = {
 
 const sendHttpRequest = axios.create();
 
-const httpRequest = (request: AxiosRequestConfig) => {
+const httpRequest = async (request: AxiosRequestConfig) => {
   return new Promise((resolve: (response: AxiosResponse) => void, reject) => {
     sendHttpRequest(request)
       .then((response) => {

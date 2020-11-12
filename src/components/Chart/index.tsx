@@ -15,6 +15,7 @@ export type Item = {
 export type ChartProps = {
     classNames?: string;
     items?: Item[];
+    showAverage?: boolean;
 }
 
 
@@ -29,7 +30,7 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
     }, [props.items])
 
     return <ResponsiveContainer className={props.classNames ?? props.classNames} width="60%"
-                                height={500}>
+                                    height={500}>
         {props.items && props.items.length > 0 ?
             <LineChart
                 data={props.items}
@@ -38,13 +39,16 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
                 }}
             >
                 <CartesianGrid strokeDasharray="3 3"/>
-                <XAxis dataKey="date" tick={{fontSize: 12}} tickFormatter={(date) => moment(date).format(defaultDateFormat)}/>
+                <XAxis dataKey="date" tick={{fontSize: 12}}
+                       tickFormatter={(date) => moment(date).format(defaultDateFormat)}/>
                 <YAxis tick={{fontSize: 12}} tickFormatter={(value) => "$" + value}/>
                 <Tooltip/>
                 <Line type="monotone" dataKey="open" stroke="#0099ff"/>
-                <ReferenceLine y={mean} stroke="#ff8533" strokeDasharray="10"/>
-            </LineChart> : <div className={"message-container"}> <Message type="is-dark" header="No loaded data" body="Search for a stock and select date range to display data" /></div> }
-    </ResponsiveContainer>;
+                {props.showAverage && <ReferenceLine y={mean} stroke="#ff8533" strokeDasharray="10"/>}
+            </LineChart> : <div className="feedback"><Message type="is-dark" header="No loaded data"
+                                                                         body="Search for a stock and select date range to display data"/>
+            </div>}
+    </ResponsiveContainer>
 }
 
 export default Chart;

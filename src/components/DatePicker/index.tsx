@@ -41,13 +41,6 @@ const RangeDatePicker: React.FunctionComponent<RangeDatePickerProps> = (props) =
         props.onChangeRange(ranges.selection);
     }
 
-    console.log("range");
-    console.log({...range});
-
-
-    console.log("props");
-    console.log({...props.initialRange});
-
     return (
         <DateRange
             ranges={[range]}

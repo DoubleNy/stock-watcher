@@ -1,13 +1,4 @@
-.stock-chart {
-  display: table;
-
-  .message-container {
-    display: table-cell;
-    vertical-align: middle;
-
-    .message {
-      width: fit-content;
-      margin: auto;
-    }
-  }
+.feedback {
+  width: 24rem;
+  margin: 2.5rem auto;
 }

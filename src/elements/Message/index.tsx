@@ -18,7 +18,7 @@ const Message: React.FunctionComponent<MessageProps> = (props) => {
         return classNames;
     };
 
-    return ( <article className={getMessageClasses()}>
+    return <article className={getMessageClasses()}>
                 <div className="message-header">
                     <p>{props.header}</p>
                 </div>
@@ -26,7 +26,6 @@ const Message: React.FunctionComponent<MessageProps> = (props) => {
                     {props.body}
                 </div>
             </article>
-    );
 };
 
 export default Message;
