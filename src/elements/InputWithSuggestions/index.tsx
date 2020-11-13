@@ -1,7 +1,7 @@
 import React from "react";
-import { MarkRequired } from "ts-essentials";
+import {MarkRequired} from "ts-essentials";
 
-import Input, { InputProps } from "elements/Input";
+import Input, {InputProps} from "elements/Input";
 import Suggestions from "elements/Suggestions";
 
 import {StringMap} from "commonlib/utils";

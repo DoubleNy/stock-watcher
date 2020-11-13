@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 
 export type HttpResponse<T> = {
   data: T;
