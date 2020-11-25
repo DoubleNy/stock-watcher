@@ -36,12 +36,6 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
   const [domain, setDomain] = useState<[number, number]>();
 
   useEffect(() => {
-    const normalize = (volume: number, minX: number, maxX: number, range: { lower: number; upper: number }) => {
-      const x = range.upper - (range.lower * (volume - minX)) / (maxX - minX) + range.lower;
-      console.log(x);
-      return x;
-    };
-
     if (props.items) {
       let min = 1e9;
       let max = -1;

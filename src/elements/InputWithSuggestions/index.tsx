@@ -48,7 +48,6 @@ class InputWithSuggestions extends React.Component<InputWithSuggestionsProps, In
   }
 
   componentDidUpdate(prevProps: Readonly<InputWithSuggestionsProps>, prevState: Readonly<InputWithSuggestionsState>) {
-    console.log(this.props.value);
     if (prevProps.hideSuggestions !== this.props.hideSuggestions) {
       this.setState({ suggestions: [] });
     }

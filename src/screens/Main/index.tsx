@@ -27,7 +27,6 @@ export type MainProps = {
 };
 
 const Main: React.FunctionComponent<MainProps> = (props) => {
-  const [allItems, setAllItems] = useState<Item[]>([]);
   const [filteredItems, setFilteredItems] = useState<Item[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [range, setRange] = useState<Range>();
@@ -36,10 +35,10 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
   useEffect(() => {
     handleUpdateRange(range ?? getInitialRange());
     setIsLoading(false);
-  }, [allItems]);
+  }, [props.items]);
 
   const handleUpdateRange = (range: Range) => {
-    const filteredItems = allItems.filter((el) => {
+    const filteredItems = props.items.filter((el) => {
       return new Date(el.date) > range.startDate! && new Date(el.date) < range.endDate!;
     });
 
@@ -75,9 +74,7 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
         allItems.push(entry);
       });
 
-      setAllItems(allItems.reverse());
-      // console.log("handleSearch");
-      // update(allItems.reverse());
+      props.update(allItems.reverse());
     } else {
       console.log("API CALL ERROR");
       console.log("Status: " + status);
@@ -98,11 +95,9 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
-  return {
-    update: (data: Item[]) => dispatch(update(data)),
-  };
-};
+const mapDispatchToProps = (dispatch: Redux.Dispatch) => ({
+  update: (data: Item[]) => dispatch(update(data)),
+});
 
 const mapStateToProps = (state: StoreState) => ({
   items: state.data,

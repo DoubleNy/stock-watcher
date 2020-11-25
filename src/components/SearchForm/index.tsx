@@ -18,7 +18,7 @@ export type SearchFormProps = {
 const MAX_SUGGESTIONS = 5;
 
 const SearchForm: React.FunctionComponent<SearchFormProps> = (props) => {
-  const [value, setValue] = useState<string>();
+  const [value, setValue] = useState<string>("");
   const [suggestions, setSuggestions] = useState<StringMap[]>([]);
 
   useEffect(() => {

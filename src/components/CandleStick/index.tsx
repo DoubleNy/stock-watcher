@@ -62,14 +62,13 @@ export const CandleStick: React.FunctionComponent<CandleStickProps> = (props) =>
           tick={{ fontSize: 12 }}
           tickFormatter={(date) => moment(date).format(defaultDateFormat)}
         />
-        {console.log(props.domain)}
         <YAxis allowDataOverflow tick={{ fontSize: 12 }} tickFormatter={(value) => "$" + value} domain={props.domain} />
 
         {/*Floating bar*/}
         <Bar dataKey="low" fillOpacity={0} stackId={"stack"} />
         <Bar isAnimationActive={false} dataKey="height" stackId={"stack"} barSize={barWidth}>
-          {data.map((entry) => (
-            <Cell fill={entry.up ? colorUp : colorDown} />
+          {data.map((entry, index) => (
+            <Cell fill={entry.up ? colorUp : colorDown} key={index} />
           ))}
         </Bar>
 

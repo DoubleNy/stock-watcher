@@ -10,7 +10,7 @@ export interface InputProps
 }
 
 const Input: React.FunctionComponent<InputProps> = (props) => {
-  const { id, inputClassName, className, hasClearBtn, ...inputProps } = props;
+  const { id, inputClassName, className, onClear, hasClearBtn, ...inputProps } = props;
 
   const getInputClassNames = () => {
     let classNames = "input ";
@@ -24,7 +24,7 @@ const Input: React.FunctionComponent<InputProps> = (props) => {
 
   return (
     <div className="control">
-      <input id={id} className={getInputClassNames()} autoComplete={"off"} {...inputProps} />{" "}
+      <input id={id} className={getInputClassNames()} autoComplete={"off"} {...inputProps} />
       {hasClearBtn && <button onClick={props.onClear} type="button" className="delete" />}
     </div>
   );
