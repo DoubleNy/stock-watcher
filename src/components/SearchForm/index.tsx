@@ -5,8 +5,9 @@ import Button from "elements/Button";
 import InputWithSuggestions from "elements/InputWithSuggestions";
 
 import httpRequest, { HttpResponse } from "communication/protocols/http/request";
-import { getSearchSugesstions, StringMap } from "commonlib/utils";
+import { getSearchSugesstions } from "commonlib/utils";
 import { HttpMethod } from "communication/protocols/http/utils";
+import { StringMap } from "commonlib/types";
 
 import "./_index.scss";
 

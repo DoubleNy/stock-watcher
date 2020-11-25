@@ -1,34 +1,34 @@
 .main--container {
   padding-top: 10%;
-  height: 80vh;
   display: flex;
+  height: 80vh;
 
   & &__configurations {
     padding-top: 2.5rem;
     margin: 0 auto;
-    height: 500px;
     display: flex;
+    height: 500px;
 
     .rdrDateRangePickerWrapper {
-      line-height: 2.5rem;
-      height: 400px;
       margin: auto;
+      height: 400px;
+      line-height: 2.5rem;
 
       .rdrDefinedRangesWrapper {
-        background: none !important;
         border: lightgrey 1.75px dashed;
         border-radius: 2.5px;
+        background: none !important;
 
         .rdrStaticRanges {
           .rdrStaticRange {
-            background: none !important;
             border-bottom: lightgrey 1.75px dashed;
+            background: none !important;
 
             .rdrStaticRangeLabel {
-              background: none !important;
-              font-weight: bold;
-              width: fit-content;
               margin: 0 auto;
+              width: fit-content;
+              font-weight: bold;
+              background: none !important;
             }
 
             .rdrStaticRangeLabel:hover {
@@ -40,11 +40,11 @@
       }
 
       .rdrCalendarWrapper {
-        background: none !important;
+        border-radius: 2.5px;
+        border-top: lightgrey 1.75px dashed;
         border-right: lightgrey 1.75px dashed;
         border-bottom: lightgrey 1.75px dashed;
-        border-top: lightgrey 1.75px dashed;
-        border-radius: 2.5px;
+        background: none !important;
 
         .rdrDayDisabled {
           background: none !important;
@@ -52,6 +52,14 @@
 
         .rdrDateDisplayWrapper {
           background: none !important;
+          .rdrDateDisplayItem {
+            background: none !important;
+          }
+        }
+        .rdrMonthAndYearWrapper {
+          button {
+            background: none !important;
+          }
         }
       }
     }

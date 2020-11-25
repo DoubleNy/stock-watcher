@@ -10,16 +10,18 @@ import {
   Tooltip,
   ReferenceLine,
 } from "recharts";
-import { getCustomToolTipContent, Item } from "components/Chart";
+import { getCustomToolTipContent } from "components/Chart";
 import moment from "moment";
 
-import { defaultDateFormat } from "commonlib/utils";
+import { Item } from "commonlib/types";
+import { defaultDateFormat } from "commonlib/constants";
 
-interface LineChartProps {
+type LineChartProps = {
   mean: number | false;
   data: Item[];
   domain?: [number, number];
-}
+  animate?: boolean;
+};
 
 export const LineChart: React.FunctionComponent<LineChartProps> = (props) => {
   return (
@@ -41,7 +43,14 @@ export const LineChart: React.FunctionComponent<LineChartProps> = (props) => {
         />
         <YAxis tick={{ fontSize: 12 }} tickFormatter={(value) => "$" + value} domain={props.domain} />
         <Tooltip content={getCustomToolTipContent} />
-        <Line type="monotone" dataKey="open" fill="#0099ff" stroke="#0099ff" dot={false} isAnimationActive={true} />
+        <Line
+          type="monotone"
+          dataKey="open"
+          fill="#0099ff"
+          stroke="#0099ff"
+          dot={false}
+          isAnimationActive={props.animate}
+        />
 
         {props.mean && <ReferenceLine y={props.mean} stroke="#FF7F50" opacity={0.75} strokeDasharray="5" />}
       </ComposedChart>

@@ -4,7 +4,7 @@ import { MarkRequired } from "ts-essentials";
 import Input, { InputProps } from "elements/Input";
 import Suggestions from "elements/Suggestions";
 
-import { StringMap } from "commonlib/utils";
+import { StringMap } from "commonlib/types";
 
 type BaseInputProps = Omit<MarkRequired<InputProps, "id">, "type" | "value">;
 

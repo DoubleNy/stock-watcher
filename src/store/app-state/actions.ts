@@ -1,5 +1,5 @@
-import { StateAction,  SET_ALL, SET_FILTERED } from "./types";
-import { Item } from "components/Chart";
+import { Item } from "commonlib/types";
+import { StateAction,  SET_ALL, SET_FILTERED } from "store/app-state/types";
 
 export function setAllData(data: Item[]): StateAction {
   return {

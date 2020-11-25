@@ -3,13 +3,14 @@ import * as Redux from "redux";
 import { connect } from "react-redux";
 
 import SearchForm from "components/SearchForm";
-import Chart, { Item } from "components/Chart";
-import RangeDatePicker, { Range } from "components/DatePicker";
+import Chart from "components/Chart";
+import RangeDatePicker from "components/DatePicker";
 
 import httpRequest, { HttpResponse } from "communication/protocols/http/request";
 import { getAlphaVantageUrl, getInitialRange, trimName } from "commonlib/utils";
 import { setAllData, setFilteredData } from "store/app-state/actions";
 import { StoreState } from "store";
+import { Item, Range } from "commonlib/types";
 
 import "./_index.scss";
 

@@ -1,7 +1,7 @@
 import {
   subBusinessDays,
   subMonths,
-  subDays,
+  addDays,
   subYears,
   startOfYear,
   isSameDay,
@@ -80,18 +80,32 @@ export const defaultStaticRanges = createStaticRanges([
 
 export const defaultInputRanges = [
   {
-    label: "days up to today",
+    label: 'days up to today',
     range(value) {
-      console.log(value);
       return {
-        startDate: subDays(defines.today, Math.max(Number(value), 1) - 1),
-        endDate: defines.today,
+        startDate: addDays(defines.startOfToday, (Math.max(Number(value), 1) - 1) * -1),
+        endDate: defines.endOfToday,
       };
     },
     getCurrentValue(range) {
-      if (!isSameDay(range.endDate, defines.endOfToday)) return "-";
-      if (!range.startDate) return "∞";
+      if (!isSameDay(range.endDate, defines.endOfToday)) return '-';
+      if (!range.startDate) return '∞';
       return differenceInCalendarDays(defines.endOfToday, range.startDate) + 1;
     },
   },
+  // {
+  //   label: 'days starting today',
+  //   range(value) {
+  //     const today = new Date();
+  //     return {
+  //       startDate: today,
+  //       endDate: addDays(today, Math.max(Number(value), 1) - 1),
+  //     };
+  //   },
+  //   getCurrentValue(range) {
+  //     if (!isSameDay(range.startDate, defineds.startOfToday)) return '-';
+  //     if (!range.endDate) return '∞';
+  //     return differenceInCalendarDays(range.endDate, defineds.startOfToday) + 1;
+  //   },
+  // },
 ];

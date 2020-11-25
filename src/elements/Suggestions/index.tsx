@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StringMap } from "commonlib/utils";
+import { StringMap } from "commonlib/types";
 
 import "./_index.scss";
 

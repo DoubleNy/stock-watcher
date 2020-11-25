@@ -1,4 +1,4 @@
-import { Item } from "components/Chart";
+import { Item } from "commonlib/types";
 
 export type AppState = {
   allData: Item[];

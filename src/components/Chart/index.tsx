@@ -8,31 +8,17 @@ import Toggle from "elements/Toggle";
 
 import { createIconElement } from "commonlib/icons/utils";
 import { StoreState } from "store";
+import { CustomToolTip, Item, ViewMode } from "commonlib/types";
 
 import { ReactComponent as CandleStickChartIcon } from "icons/candlestick.svg";
 import { ReactComponent as LineChartIcon } from "icons/line.svg";
 
 import "./_index.scss";
 
-export type Item = {
-  [name: string]: number | string;
-};
-
-enum ChartMode {
-  CANDLESTICK,
-  LINE,
-}
-
-export type ChartProps = {
+type ChartProps = {
   classNames?: string;
   filteredData: Item[];
   showAverage?: boolean;
-};
-
-type CustomToolTip = {
-  active: boolean;
-  label: string;
-  payload: any;
 };
 
 export const getCustomToolTipContent = (data: CustomToolTip) => {
@@ -53,7 +39,8 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
   const [mean, setMean] = useState<number>(0);
   const [showMean, setShowMean] = useState(false);
   const [showChart, setShowChart] = useState(false);
-  const [chartMode, setChartMode] = useState(ChartMode.LINE);
+  const [viewMode, setViewMode] = useState(ViewMode.LINE);
+  const [animate, setAnimate] = useState(true);
 
   const [domain, setDomain] = useState<[number, number]>();
 
@@ -81,6 +68,7 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
 
       setDomain([lowerBound, upperBound]);
       setMean(mean);
+      setAnimate(false);
       setShowChart(props.filteredData && props.filteredData.length > 0);
     }
   }, [props.filteredData]);
@@ -89,8 +77,9 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
     setShowMean(checked);
   };
 
-  const handleChangeChart = (chartMode: ChartMode) => {
-    setChartMode(chartMode);
+  const handleUpdateChart = (viewMode: ViewMode) => {
+    setViewMode(viewMode);
+    setAnimate(true);
   };
 
   return (
@@ -105,16 +94,16 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
               onToggle={handleDisplayAverage}
               isRounded
             />
-            {chartMode === ChartMode.CANDLESTICK
-              ? createIconElement(LineChartIcon, { handleClick: () => handleChangeChart(ChartMode.LINE) })
+            {viewMode === ViewMode.CANDLESTICK
+              ? createIconElement(LineChartIcon, { handleClick: () => handleUpdateChart(ViewMode.LINE) })
               : createIconElement(CandleStickChartIcon, {
-                  handleClick: () => handleChangeChart(ChartMode.CANDLESTICK),
+                  handleClick: () => handleUpdateChart(ViewMode.CANDLESTICK),
                 })}
           </div>
-          {chartMode === ChartMode.CANDLESTICK ? (
-            <CandleStick data={props.filteredData} mean={showMean && mean} domain={domain} />
+          {viewMode === ViewMode.CANDLESTICK ? (
+            <CandleStick data={props.filteredData} mean={showMean && mean} domain={domain} animate={animate} />
           ) : (
-            <LineChart data={props.filteredData} mean={showMean && mean} domain={domain} />
+            <LineChart data={props.filteredData} mean={showMean && mean} domain={domain} animate={animate} />
           )}
         </>
       ) : (

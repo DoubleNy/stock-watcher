@@ -12,37 +12,18 @@ import {
   ReferenceLine,
   Tooltip,
 } from "recharts";
-import { getCustomToolTipContent, Item } from "components/Chart";
+import { getCustomToolTipContent } from "components/Chart";
 import moment from "moment";
 
-import { defaultDateFormat } from "commonlib/utils";
+import { CandleStickDataPoint, Item } from "commonlib/types";
+import { BAR_WIDTH, COLOR_DOWN, COLOR_UP, defaultDateFormat, LINE_WIDTH } from "commonlib/constants";
 
-const COLOR_UP = "#00906F";
-const COLOR_DOWN = "#B23507";
-const BAR_WIDTH = 10;
-const LINE_WIDTH = 2.5;
-
-type CandleStickDataPoint = {
-  date: string;
-  close: number;
-  open: number;
-  low: number;
-  high: number;
-  height: number;
-  errorLineHigh: number;
-  errorLineLow: number;
-  errorLowUp: number | null;
-  errorHighUp: number | null;
-  errorLowDown: number | null;
-  errorHighDown: number | null;
-  up: boolean;
-};
-
-interface CandleStickProps {
+type CandleStickProps = {
   data: Item[];
   mean: number | false;
   domain?: [number, number];
-}
+  animate?: boolean;
+};
 
 export const CandleStick: React.FunctionComponent<CandleStickProps> = (props) => {
   const [points, setPoints] = useState<CandleStickDataPoint[]>([]);
@@ -89,8 +70,14 @@ export const CandleStick: React.FunctionComponent<CandleStickProps> = (props) =>
         <YAxis allowDataOverflow tick={{ fontSize: 12 }} tickFormatter={(value) => "$" + value} domain={props.domain} />
 
         {/*Floating bar*/}
-        <Bar dataKey="low" fillOpacity={0} stackId={"stack"} />
-        <Bar isAnimationActive={false} dataKey="height" stackId={"stack"} barSize={BAR_WIDTH}>
+        <Bar isAnimationActive={false} dataKey="low" fillOpacity={0} stackId={"stack"} />
+        <Bar
+          isAnimationActive={props.animate}
+          isUpdateAnimationActive={false}
+          dataKey="height"
+          stackId={"stack"}
+          barSize={BAR_WIDTH}
+        >
           {points.map((entry, index) => (
             <Cell fill={entry.up ? COLOR_UP : COLOR_DOWN} key={index} />
           ))}
