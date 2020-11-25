@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/stock-watcher/static/css/main.41368e24.chunk.css",
-    "main.js": "/stock-watcher/static/js/main.dc35715b.chunk.js",
-    "main.js.map": "/stock-watcher/static/js/main.dc35715b.chunk.js.map",
-    "runtime-main.js": "/stock-watcher/static/js/runtime-main.64238946.js",
-    "runtime-main.js.map": "/stock-watcher/static/js/runtime-main.64238946.js.map",
+    "main.css": "/stock-watcher/static/css/main.d5beb8de.chunk.css",
+    "main.js": "/stock-watcher/static/js/main.482c1d64.chunk.js",
+    "main.js.map": "/stock-watcher/static/js/main.482c1d64.chunk.js.map",
+    "runtime-main.js": "/stock-watcher/static/js/runtime-main.95c977cb.js",
+    "runtime-main.js.map": "/stock-watcher/static/js/runtime-main.95c977cb.js.map",
     "static/css/2.06382735.chunk.css": "/stock-watcher/static/css/2.06382735.chunk.css",
-    "static/js/2.a735c9ed.chunk.js": "/stock-watcher/static/js/2.a735c9ed.chunk.js",
-    "static/js/2.a735c9ed.chunk.js.map": "/stock-watcher/static/js/2.a735c9ed.chunk.js.map",
-    "static/js/3.00612a88.chunk.js": "/stock-watcher/static/js/3.00612a88.chunk.js",
-    "static/js/3.00612a88.chunk.js.map": "/stock-watcher/static/js/3.00612a88.chunk.js.map",
+    "static/js/2.df52edb9.chunk.js": "/stock-watcher/static/js/2.df52edb9.chunk.js",
+    "static/js/2.df52edb9.chunk.js.map": "/stock-watcher/static/js/2.df52edb9.chunk.js.map",
+    "static/js/3.2f6b6d86.chunk.js": "/stock-watcher/static/js/3.2f6b6d86.chunk.js",
+    "static/js/3.2f6b6d86.chunk.js.map": "/stock-watcher/static/js/3.2f6b6d86.chunk.js.map",
     "index.html": "/stock-watcher/index.html",
     "static/css/2.06382735.chunk.css.map": "/stock-watcher/static/css/2.06382735.chunk.css.map",
-    "static/css/main.41368e24.chunk.css.map": "/stock-watcher/static/css/main.41368e24.chunk.css.map",
-    "static/js/2.a735c9ed.chunk.js.LICENSE.txt": "/stock-watcher/static/js/2.a735c9ed.chunk.js.LICENSE.txt",
+    "static/css/main.d5beb8de.chunk.css.map": "/stock-watcher/static/css/main.d5beb8de.chunk.css.map",
+    "static/js/2.df52edb9.chunk.js.LICENSE.txt": "/stock-watcher/static/js/2.df52edb9.chunk.js.LICENSE.txt",
     "static/media/candlestick.46094b64.svg": "/stock-watcher/static/media/candlestick.46094b64.svg",
     "static/media/line.fc0c2e9b.svg": "/stock-watcher/static/media/line.fc0c2e9b.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.64238946.js",
+    "static/js/runtime-main.95c977cb.js",
     "static/css/2.06382735.chunk.css",
-    "static/js/2.a735c9ed.chunk.js",
-    "static/css/main.41368e24.chunk.css",
-    "static/js/main.dc35715b.chunk.js"
+    "static/js/2.df52edb9.chunk.js",
+    "static/css/main.d5beb8de.chunk.css",
+    "static/js/main.482c1d64.chunk.js"
   ]
 }
