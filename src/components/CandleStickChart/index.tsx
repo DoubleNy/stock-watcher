@@ -18,14 +18,14 @@ import moment from "moment";
 import { CandleStickDataPoint, Item } from "commonlib/types";
 import { BAR_WIDTH, COLOR_DOWN, COLOR_UP, defaultDateFormat, LINE_WIDTH } from "commonlib/constants";
 
-type CandleStickProps = {
+type CandleStickChartProps = {
   data: Item[];
   mean: number | false;
   domain?: [number, number];
   animate?: boolean;
 };
 
-export const CandleStick: React.FunctionComponent<CandleStickProps> = (props) => {
+export const CandleStickChart: React.FunctionComponent<CandleStickChartProps> = (props) => {
   const [points, setPoints] = useState<CandleStickDataPoint[]>([]);
 
   useEffect(() => {

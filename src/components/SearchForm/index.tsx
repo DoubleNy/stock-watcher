@@ -17,13 +17,14 @@ export type SearchFormProps = {
 };
 
 const MAX_SUGGESTIONS = 5;
+const LAST_SEARCH_VALUE_KEY = "LAST_SEARCH_VALUE_KEY";
 
 const SearchForm: React.FunctionComponent<SearchFormProps> = (props) => {
   const [value, setValue] = useState<string>("");
   const [suggestions, setSuggestions] = useState<StringMap[]>([]);
 
   useEffect(() => {
-    const localStorageValue = localStorage.getItem("value");
+    const localStorageValue = localStorage.getItem(LAST_SEARCH_VALUE_KEY);
     if (localStorageValue) {
       setValue(localStorageValue);
     }
@@ -31,7 +32,7 @@ const SearchForm: React.FunctionComponent<SearchFormProps> = (props) => {
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
-    localStorage.setItem("value", event.target.value);
+    localStorage.setItem(LAST_SEARCH_VALUE_KEY, event.target.value);
   };
 
   const validateInputValue = async () => {

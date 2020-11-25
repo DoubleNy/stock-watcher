@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import { CandleStick } from "components/CandleStick";
+import { CandleStickChart } from "components/CandleStickChart";
 import { LineChart } from "components/LineChart";
 import Message from "elements/Message";
 import Toggle from "elements/Toggle";
@@ -101,7 +101,7 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
                 })}
           </div>
           {viewMode === ViewMode.CANDLESTICK ? (
-            <CandleStick data={props.filteredData} mean={showMean && mean} domain={domain} animate={animate} />
+            <CandleStickChart data={props.filteredData} mean={showMean && mean} domain={domain} animate={animate} />
           ) : (
             <LineChart data={props.filteredData} mean={showMean && mean} domain={domain} animate={animate} />
           )}
