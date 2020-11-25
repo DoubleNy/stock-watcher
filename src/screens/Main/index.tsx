@@ -8,7 +8,7 @@ import RangeDatePicker, { Range } from "components/DatePicker";
 
 import httpRequest, { HttpResponse } from "communication/protocols/http/request";
 import { getAlphaVantageUrl, getInitialRange, trimName } from "commonlib/utils";
-import { update } from "store/app-state/actions";
+import { setAllData, setFilteredData } from "store/app-state/actions";
 import { StoreState } from "store";
 
 import "./_index.scss";
@@ -22,28 +22,27 @@ type AlphaVantageResponseDataType = {
 };
 
 export type MainProps = {
-  items: Item[];
-  update: typeof update;
+  data: Item[];
+  setAllData: typeof setAllData;
+  setFilteredData: typeof setFilteredData;
 };
 
 const Main: React.FunctionComponent<MainProps> = (props) => {
-  const [filteredItems, setFilteredItems] = useState<Item[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [range, setRange] = useState<Range>();
-  const [showAverage, setShowAverage] = useState<boolean>(false);
 
   useEffect(() => {
     handleUpdateRange(range ?? getInitialRange());
     setIsLoading(false);
-  }, [props.items]);
+  }, [props.data]);
 
   const handleUpdateRange = (range: Range) => {
-    const filteredItems = props.items.filter((el) => {
+    const filteredData = props.data.filter((el) => {
       return new Date(el.date) > range.startDate! && new Date(el.date) < range.endDate!;
     });
 
     setRange(range);
-    setFilteredItems(filteredItems);
+    props.setFilteredData(filteredData);
   };
 
   const handleSearch = async (value: string) => {
@@ -74,7 +73,7 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
         allItems.push(entry);
       });
 
-      props.update(allItems.reverse());
+      props.setAllData(allItems.reverse());
     } else {
       console.log("API CALL ERROR");
       console.log("Status: " + status);
@@ -86,7 +85,7 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
     <>
       <SearchForm onSearch={handleSearch} isLoading={isLoading} />
       <div className={"main--container"}>
-        <Chart classNames={"main--container__chart"} items={filteredItems} showAverage={showAverage} />
+        <Chart classNames={"main--container__chart"} />
         <div className="main--container__configurations">
           <RangeDatePicker onChangeRange={handleUpdateRange} initialRange={range} />
         </div>
@@ -96,11 +95,12 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
 };
 
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => ({
-  update: (data: Item[]) => dispatch(update(data)),
+  setAllData: (data: Item[]) => dispatch(setAllData(data)),
+  setFilteredData: (data: Item[]) => dispatch(setFilteredData(data)),
 });
 
 const mapStateToProps = (state: StoreState) => ({
-  items: state.data,
+  data: state.allData,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

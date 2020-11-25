@@ -1,6 +1,7 @@
 .search--form {
-  width: 30vw;
-  margin: 2.5rem auto;
+  width: fit-content;
+  padding-top: 2.5rem;
+  margin: 0 auto;
 
   & &__search--input {
     height: 3rem;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { DateRangePicker } from "react-date-range";
 
-import { defaultInputRanges, defaultStaticRanges } from "./defaultRanges";
+import { defaultInputRanges, defaultStaticRanges } from "components/DatePicker/defaultRanges";
 
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";

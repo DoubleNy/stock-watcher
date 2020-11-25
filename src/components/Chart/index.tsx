@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
 import { CandleStick } from "components/CandleStick";
 import { LineChart } from "components/LineChart";
@@ -6,6 +7,7 @@ import Message from "elements/Message";
 import Toggle from "elements/Toggle";
 
 import { createIconElement } from "commonlib/icons/utils";
+import { StoreState } from "store";
 
 import { ReactComponent as CandleStickChartIcon } from "icons/candlestick.svg";
 import { ReactComponent as LineChartIcon } from "icons/line.svg";
@@ -23,8 +25,28 @@ enum ChartMode {
 
 export type ChartProps = {
   classNames?: string;
-  items: Item[];
+  filteredData: Item[];
   showAverage?: boolean;
+};
+
+type CustomToolTip = {
+  active: boolean;
+  label: string;
+  payload: any;
+};
+
+export const getCustomToolTipContent = (data: CustomToolTip) => {
+  if (data.active) {
+    return (
+      <div className="custom-tooltip">
+        <p className="label">{`Date: ${data.label}`}</p>
+        <p className="open">{`Open: ${data.payload[0].payload["open"]}`}</p>
+        <p className="close">{`Close: ${data.payload[0].payload["close"]}`}</p>
+      </div>
+    );
+  }
+
+  return null;
 };
 
 const Chart: React.FunctionComponent<ChartProps> = (props) => {
@@ -36,14 +58,14 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
   const [domain, setDomain] = useState<[number, number]>();
 
   useEffect(() => {
-    if (props.items) {
+    if (props.filteredData) {
       let min = 1e9;
       let max = -1;
 
       let vMin = 1e9;
       let vMax = -1;
 
-      const sum = props.items.reduce((prev, next) => {
+      const sum = props.filteredData.reduce((prev, next) => {
         min = Math.min(+next.open, min);
         vMin = Math.min(+next.volume, vMin);
 
@@ -55,13 +77,13 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
 
       const lowerBound = Math.round(Math.max(0, min - (min / 100) * 10));
       const upperBound = Math.round(max + (max / 100) * 10);
-      const mean = sum / props.items.length;
+      const mean = sum / props.filteredData.length;
 
       setDomain([lowerBound, upperBound]);
       setMean(mean);
-      setShowChart(props.items && props.items.length > 0);
+      setShowChart(props.filteredData && props.filteredData.length > 0);
     }
-  }, [props.items]);
+  }, [props.filteredData]);
 
   const handleDisplayAverage = (checked: boolean) => {
     setShowMean(checked);
@@ -73,7 +95,7 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
 
   return (
     <div className={props.classNames ?? props.classNames}>
-      {props.items && showChart ? (
+      {props.filteredData && showChart ? (
         <>
           <div className="configurations--bar">
             <Toggle
@@ -90,9 +112,9 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
                 })}
           </div>
           {chartMode === ChartMode.CANDLESTICK ? (
-            <CandleStick data={props.items} mean={showMean && mean} domain={domain} />
+            <CandleStick data={props.filteredData} mean={showMean && mean} domain={domain} />
           ) : (
-            <LineChart data={props.items} mean={showMean && mean} domain={domain} />
+            <LineChart data={props.filteredData} mean={showMean && mean} domain={domain} />
           )}
         </>
       ) : (
@@ -106,4 +128,8 @@ const Chart: React.FunctionComponent<ChartProps> = (props) => {
   );
 };
 
-export default Chart;
+const mapStateToProps = (state: StoreState) => ({
+  filteredData: state.filteredData,
+});
+
+export default connect(mapStateToProps)(Chart);

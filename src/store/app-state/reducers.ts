@@ -1,14 +1,17 @@
-import { act } from "react-dom/test-utils";
-import { AppState, StateAction, UPDATE } from "./types";
+import { AppState, StateAction, SET_ALL, SET_FILTERED} from "./types";
 
 const initialState: AppState = {
-  data: [],
+  allData: [],
+  filteredData: [],
 };
 
 export function appReducer(state = initialState, action: StateAction): AppState {
   switch (action.type) {
-    case UPDATE:
-      return { data: action.payload };
+    case SET_ALL:
+      return { allData: action.payload, filteredData: [] };
+
+    case SET_FILTERED: 
+      return {...state, filteredData: action.payload}
 
     default:
       return state;

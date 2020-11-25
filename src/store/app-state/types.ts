@@ -1,14 +1,21 @@
 import { Item } from "components/Chart";
 
 export type AppState = {
-  data: Item[];
+  allData: Item[];
+  filteredData: Item[]
 };
 
-export const UPDATE = "UPDATE";
+export const SET_ALL = "SET_ALL";
+export const SET_FILTERED = "SET_FILTERED";
 
-type Update = {
-  type: typeof UPDATE;
+type SetAll = {
+  type: typeof SET_ALL;
   payload: Item[];
 };
 
-export type StateAction = Update;
+type SetFiltered = {
+  type: typeof SET_FILTERED;
+  payload: Item[];
+};
+
+export type StateAction = SetAll | SetFiltered;

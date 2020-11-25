@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CartesianGrid,
   XAxis,
@@ -11,11 +10,33 @@ import {
   Cell,
   ResponsiveContainer,
   ReferenceLine,
+  Tooltip,
 } from "recharts";
-import { Item } from "components/Chart";
+import { getCustomToolTipContent, Item } from "components/Chart";
 import moment from "moment";
 
 import { defaultDateFormat } from "commonlib/utils";
+
+const COLOR_UP = "#00906F";
+const COLOR_DOWN = "#B23507";
+const BAR_WIDTH = 10;
+const LINE_WIDTH = 2.5;
+
+type CandleStickDataPoint = {
+  date: string;
+  close: number;
+  open: number;
+  low: number;
+  high: number;
+  height: number;
+  errorLineHigh: number;
+  errorLineLow: number;
+  errorLowUp: number | null;
+  errorHighUp: number | null;
+  errorLowDown: number | null;
+  errorHighDown: number | null;
+  up: boolean;
+};
 
 interface CandleStickProps {
   data: Item[];
@@ -24,31 +45,34 @@ interface CandleStickProps {
 }
 
 export const CandleStick: React.FunctionComponent<CandleStickProps> = (props) => {
-  const [colorUp] = useState("#00906F");
-  const [colorDown] = useState("#B23507");
-  const [barWidth] = useState(10);
-  const [lineWidth] = useState(2.1);
+  const [points, setPoints] = useState<CandleStickDataPoint[]>([]);
 
-  const data = props.data.map((point: Item): any => {
-    return {
-      date: point.date,
-      low: Math.min(+point.close, +point.open),
-      high: Math.max(+point.close, +point.open),
-      height: Math.abs(+point.close - +point.open),
-      errorLineHigh: (+point.high - Math.max(+point.close, +point.open)) / 2 + Math.max(+point.close, +point.open),
-      errorLineLow: Math.min(+point.close, +point.open) - (Math.min(+point.close, +point.open) - +point.low) / 2,
-      errorLowUp: point.close > point.open ? (Math.min(+point.close, +point.open) - +point.low) / 2 : null,
-      errorHighUp: point.close > point.open ? (+point.high - Math.max(+point.close, +point.open)) / 2 : null,
-      errorLowDown: point.close <= point.open ? (Math.min(+point.close, +point.open) - +point.low) / 2 : null,
-      errorHighDown: point.close <= point.open ? (+point.high - Math.max(+point.close, +point.open)) / 2 : null,
-      up: point.close > point.open,
-    };
-  });
+  useEffect(() => {
+    setPoints(
+      props.data.map(
+        (point: Item): CandleStickDataPoint => ({
+          date: point.date as string,
+          low: Math.min(+point.close, +point.open),
+          high: Math.max(+point.close, +point.open),
+          height: Math.abs(+point.close - +point.open),
+          errorLineHigh: (+point.high - Math.max(+point.close, +point.open)) / 2 + Math.max(+point.close, +point.open),
+          errorLineLow: Math.min(+point.close, +point.open) - (Math.min(+point.close, +point.open) - +point.low) / 2,
+          errorLowUp: point.close > point.open ? (Math.min(+point.close, +point.open) - +point.low) / 2 : null,
+          errorHighUp: point.close > point.open ? (+point.high - Math.max(+point.close, +point.open)) / 2 : null,
+          errorLowDown: point.close <= point.open ? (Math.min(+point.close, +point.open) - +point.low) / 2 : null,
+          errorHighDown: point.close <= point.open ? (+point.high - Math.max(+point.close, +point.open)) / 2 : null,
+          up: point.close > point.open,
+          close: point.close as number,
+          open: point.open as number,
+        }),
+      ),
+    );
+  }, [props.data]);
 
   return (
     <ResponsiveContainer height={500}>
       <ComposedChart
-        data={data}
+        data={points}
         margin={{
           top: 5,
           right: 30,
@@ -66,29 +90,32 @@ export const CandleStick: React.FunctionComponent<CandleStickProps> = (props) =>
 
         {/*Floating bar*/}
         <Bar dataKey="low" fillOpacity={0} stackId={"stack"} />
-        <Bar isAnimationActive={false} dataKey="height" stackId={"stack"} barSize={barWidth}>
-          {data.map((entry, index) => (
-            <Cell fill={entry.up ? colorUp : colorDown} key={index} />
+        <Bar isAnimationActive={false} dataKey="height" stackId={"stack"} barSize={BAR_WIDTH}>
+          {points.map((entry, index) => (
+            <Cell fill={entry.up ? COLOR_UP : COLOR_DOWN} key={index} />
           ))}
         </Bar>
 
         {/*Error down*/}
         <Line dataKey={"errorLineHigh"} stroke={"none"} isAnimationActive={false} dot={false}>
-          <ErrorBar dataKey={"errorHighDown"} width={lineWidth} strokeWidth={lineWidth - 1} stroke={colorDown} />
+          <ErrorBar dataKey={"errorHighDown"} width={LINE_WIDTH} strokeWidth={LINE_WIDTH - 1} stroke={COLOR_DOWN} />
         </Line>
 
         <Line dataKey={"errorLineLow"} stroke={"none"} isAnimationActive={false} dot={false}>
-          <ErrorBar dataKey={"errorLowDown"} width={lineWidth} strokeWidth={lineWidth - 1} stroke={colorDown} />
+          <ErrorBar dataKey={"errorLowDown"} width={LINE_WIDTH} strokeWidth={LINE_WIDTH - 1} stroke={COLOR_DOWN} />
         </Line>
 
         {/*Error up */}
         <Line dataKey={"errorLineHigh"} stroke={"none"} isAnimationActive={false} dot={false}>
-          <ErrorBar dataKey={"errorHighUp"} width={lineWidth} strokeWidth={lineWidth - 1} stroke={colorUp} />
+          <ErrorBar dataKey={"errorHighUp"} width={LINE_WIDTH} strokeWidth={LINE_WIDTH - 1} stroke={COLOR_UP} />
         </Line>
 
         <Line dataKey={"errorLineLow"} stroke={"none"} isAnimationActive={false} dot={false}>
-          <ErrorBar dataKey={"errorLowUp"} width={lineWidth} strokeWidth={lineWidth - 1} stroke={colorUp} />
+          <ErrorBar dataKey={"errorLowUp"} width={LINE_WIDTH} strokeWidth={LINE_WIDTH - 1} stroke={COLOR_UP} />
         </Line>
+
+        <Tooltip content={getCustomToolTipContent} />
+
         {props.mean && <ReferenceLine y={props.mean} stroke="#FF7F50" opacity={0.75} strokeDasharray="5" />}
       </ComposedChart>
     </ResponsiveContainer>

@@ -1,4 +1,5 @@
-import * as React from "react";
+import React from "react";
+
 import {
   CartesianGrid,
   XAxis,
@@ -9,7 +10,7 @@ import {
   Tooltip,
   ReferenceLine,
 } from "recharts";
-import { Item } from "components/Chart";
+import { getCustomToolTipContent, Item } from "components/Chart";
 import moment from "moment";
 
 import { defaultDateFormat } from "commonlib/utils";
@@ -39,7 +40,7 @@ export const LineChart: React.FunctionComponent<LineChartProps> = (props) => {
           tickFormatter={(date) => moment(date).format(defaultDateFormat)}
         />
         <YAxis tick={{ fontSize: 12 }} tickFormatter={(value) => "$" + value} domain={props.domain} />
-        <Tooltip />
+        <Tooltip content={getCustomToolTipContent} />
         <Line type="monotone" dataKey="open" fill="#0099ff" stroke="#0099ff" dot={false} isAnimationActive={true} />
 
         {props.mean && <ReferenceLine y={props.mean} stroke="#FF7F50" opacity={0.75} strokeDasharray="5" />}
