@@ -11,7 +11,8 @@ export const dateRangeKey = {
   key: "selection",
 };
 
-export const COLOR_UP = "#00906F";
-export const COLOR_DOWN = "#B23507";
+export const COLOR_UP = "#48C774";
+export const COLOR_DOWN = "#FF3860";
 export const BAR_WIDTH = 10;
 export const LINE_WIDTH = 2.5;
+export const COLOR_AVERAGE = "#00D1B2";

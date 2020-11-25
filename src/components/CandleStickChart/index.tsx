@@ -16,7 +16,7 @@ import { getCustomToolTipContent } from "components/Chart";
 import moment from "moment";
 
 import { CandleStickDataPoint, Item } from "commonlib/types";
-import { BAR_WIDTH, COLOR_DOWN, COLOR_UP, defaultDateFormat, LINE_WIDTH } from "commonlib/constants";
+import { BAR_WIDTH, COLOR_AVERAGE, COLOR_DOWN, COLOR_UP, defaultDateFormat, LINE_WIDTH } from "commonlib/constants";
 
 type CandleStickChartProps = {
   data: Item[];
@@ -103,7 +103,7 @@ export const CandleStickChart: React.FunctionComponent<CandleStickChartProps> = 
 
         <Tooltip content={getCustomToolTipContent} />
 
-        {props.mean && <ReferenceLine y={props.mean} stroke="#FF7F50" opacity={0.75} strokeDasharray="5" />}
+        {props.mean && <ReferenceLine y={props.mean} stroke={COLOR_AVERAGE} opacity={0.75} strokeDasharray="5" />}
       </ComposedChart>
     </ResponsiveContainer>
   );

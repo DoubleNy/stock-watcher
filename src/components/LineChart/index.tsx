@@ -14,7 +14,7 @@ import { getCustomToolTipContent } from "components/Chart";
 import moment from "moment";
 
 import { Item } from "commonlib/types";
-import { defaultDateFormat } from "commonlib/constants";
+import { COLOR_AVERAGE, defaultDateFormat } from "commonlib/constants";
 
 type LineChartProps = {
   mean: number | false;
@@ -52,7 +52,7 @@ export const LineChart: React.FunctionComponent<LineChartProps> = (props) => {
           isAnimationActive={props.animate}
         />
 
-        {props.mean && <ReferenceLine y={props.mean} stroke="#FF7F50" opacity={0.75} strokeDasharray="5" />}
+        {props.mean && <ReferenceLine y={props.mean} stroke={COLOR_AVERAGE} opacity={0.75} strokeDasharray="5" />}
       </ComposedChart>
     </ResponsiveContainer>
   );
