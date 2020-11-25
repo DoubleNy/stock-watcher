@@ -1,3 +1,10 @@
 .input:active {
-  border:1px solid #719ECE;
+  border: 1px solid #719ece;
+}
+
+.control > .delete {
+  position: absolute;
+  top: 50%;
+  right: calc(0.625rem - 1px);
+  transform: translateY(-50%);
 }

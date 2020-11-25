@@ -4,22 +4,69 @@
   display: flex;
 
   & &__configurations {
-    margin: 2rem auto;
+    margin: 3rem auto;
+    height: 500px;
 
-    .average--price {
-      padding-top: 2.5rem;
-      width: fit-content;
-      margin: auto;
-    }
+    .rdrDateRangePickerWrapper {
+      line-height: 2.5rem;
 
-    .rdrCalendarWrapper {
-      height: 45vh;
-      background: none !important;
-
-      .rdrDayDisabled {
+      .rdrDefinedRangesWrapper {
         background: none !important;
+        border: lightgrey 1.75px dashed;
+        border-radius: 2.5px;
+
+        .rdrStaticRanges {
+          .rdrStaticRange {
+            background: none !important;
+            border-bottom: lightgrey 1.75px dashed;
+
+            .rdrStaticRangeLabel {
+              background: none !important;
+              font-weight: bold;
+              width: fit-content;
+              margin: 0 auto;
+            }
+
+            .rdrStaticRangeLabel:hover {
+              color: #3d91ff;
+              transform: scale(1.1, 1.1);
+            }
+          }
+        }
+      }
+
+      .rdrCalendarWrapper {
+        background: none !important;
+        border-right: lightgrey 1.75px dashed;
+        border-bottom: lightgrey 1.75px dashed;
+        border-top: lightgrey 1.75px dashed;
+        border-radius: 2.5px;
+
+        .rdrDayDisabled {
+          background: none !important;
+        }
+
+        .rdrDateDisplayWrapper {
+          background: none !important;
+        }
       }
     }
+
+    //.average--price {
+    //  padding-top: 2.5rem;
+    //  width: fit-content;
+    //  //height: 1.5rem;
+    //  margin: auto;
+    //
+    //}
+    //
+    //.rdrCalendarWrapper {
+    //  //height: 45vh;
+    //  background: none !important;
+    //
+    //  .rdrDayDisabled {
+    //    background: none !important;
+    //  }
+    //}
   }
 }
-

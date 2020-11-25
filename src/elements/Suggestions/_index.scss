@@ -1,6 +1,7 @@
 .box.suggestions {
   padding: 0;
-  border-top: 1px solid rgba(10, 10, 10, 0.1);
+  border: 2.5px solid #719ece;
+  border-radius: 5px;
   margin-top: -1px;
   position: absolute;
   width: 20rem;
@@ -26,8 +27,7 @@
     }
 
     .suggestion--name {
-      font-weight: lighter;
-      font-size: 14px;
+      font-size: 1.25vh;
       float: right;
     }
 

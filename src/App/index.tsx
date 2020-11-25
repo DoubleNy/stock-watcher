@@ -1,12 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import Main from "../screens/Main";
+import Main from "screens/Main";
 
-import './_index.scss';
-
+import "./_index.scss";
 
 function App() {
-     return <Main/>
+  return <Main />;
 }
 
 export default App;

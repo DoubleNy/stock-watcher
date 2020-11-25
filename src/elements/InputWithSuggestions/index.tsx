@@ -1,10 +1,10 @@
 import React from "react";
-import {MarkRequired} from "ts-essentials";
+import { MarkRequired } from "ts-essentials";
 
-import Input, {InputProps} from "elements/Input";
+import Input, { InputProps } from "elements/Input";
 import Suggestions from "elements/Suggestions";
 
-import {StringMap} from "commonlib/utils";
+import { StringMap } from "commonlib/utils";
 
 type BaseInputProps = Omit<MarkRequired<InputProps, "id">, "type" | "value">;
 
@@ -15,6 +15,7 @@ type WithSuggestions = {
 type CustomInputWithSuggestionsProps = {
   onChoose: (value: string) => void;
   value?: string;
+  hideSuggestions?: boolean;
 } & WithSuggestions;
 
 type InputWithSuggestionsProps = BaseInputProps & CustomInputWithSuggestionsProps;
@@ -46,6 +47,12 @@ class InputWithSuggestions extends React.Component<InputWithSuggestionsProps, In
     }
   }
 
+  componentDidUpdate(prevProps: Readonly<InputWithSuggestionsProps>, prevState: Readonly<InputWithSuggestionsState>) {
+    console.log(this.props.value);
+    if (prevProps.hideSuggestions !== this.props.hideSuggestions) {
+      this.setState({ suggestions: [] });
+    }
+  }
 
   handleSelect = (value: string) => {
     this.props.onChoose(value.slice(value.indexOf("$") + 1, value.length));
@@ -84,7 +91,7 @@ class InputWithSuggestions extends React.Component<InputWithSuggestionsProps, In
     }
   };
 
-  async getSuggestions(value: string)  {
+  async getSuggestions(value: string) {
     if (this.props.getSuggestions) {
       return await this.props.getSuggestions(value);
     }
@@ -96,7 +103,7 @@ class InputWithSuggestions extends React.Component<InputWithSuggestionsProps, In
     const lowerCaseValue = value.toLowerCase();
 
     for (const suggestion of this.state.suggestions) {
-      if (suggestion['symbol'].toLowerCase() === lowerCaseValue) return true;
+      if (suggestion["symbol"].toLowerCase() === lowerCaseValue) return true;
     }
 
     return false;
@@ -104,19 +111,19 @@ class InputWithSuggestions extends React.Component<InputWithSuggestionsProps, In
 
   render() {
     const { props, state } = this;
-    const { onChange, onSelect, getSuggestions, onChoose, className, ...inputProps } = props;
+    const { onChange, onSelect, getSuggestions, onChoose, className, hideSuggestions, ...inputProps } = props;
 
     return (
-        <div className="suggestions--container is-relative">
-          <Input
-              type="text"
-              value={state.value}
-              onChange={this.handleChange}
-              className={`${className || ""}${state.isLoading ? ` is-loading` : ""}`}
-              {...inputProps}
-          />
-          <Suggestions suggestions={state.suggestions} onSelection={this.handleSelect} />
-        </div>
+      <div className="suggestions--container is-relative">
+        <Input
+          type="text"
+          value={state.value}
+          onChange={this.handleChange}
+          className={`${className || ""}${state.isLoading ? ` is-loading` : ""}`}
+          {...inputProps}
+        />
+        <Suggestions suggestions={state.suggestions} onSelection={this.handleSelect} />
+      </div>
     );
   }
 }

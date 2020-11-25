@@ -1,35 +1,38 @@
-import React, {ChangeEvent} from "react";
+import React, { ChangeEvent } from "react";
 
 import Field from "elements/Field";
 
 export type ToggleProps = {
-    isRounded?: boolean;
-    type?: "is-info";
-    classNames?: string;
-    onToggle?: (value: boolean) => void;
-}
+  isRounded?: boolean;
+  type?: "is-info";
+  size?: "is-small";
+  classNames?: string;
+  onToggle?: (value: boolean) => void;
+};
 
 const Toggle: React.FunctionComponent<ToggleProps> = (props) => {
-    const getToggleClasses = () => {
-        let classNames = "switch ";
+  const getToggleClasses = () => {
+    let classNames = "switch ";
 
-        if (props.isRounded) classNames += "is-rounded";
+    if (props.isRounded) classNames += "is-rounded";
 
-        if (props.type) classNames += " " + props.type;
+    if (props.type) classNames += " " + props.type;
 
-        return classNames;
-    };
+    if (props.size) classNames += " " + props.size;
 
-    const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-        props.onToggle && props.onToggle(event.target.checked);
-    }
+    return classNames;
+  };
 
-    return (
-        <Field className={props.classNames ?? props.classNames}>
-            <input type="checkbox" id="switch" className={getToggleClasses()} onChange={handleOnChange}/>
-            <label htmlFor="switch">Average price</label>
-        </Field>
-    );
+  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+    props.onToggle && props.onToggle(event.target.checked);
+  };
+
+  return (
+    <Field className={props.classNames ?? props.classNames}>
+      <input type="checkbox" id="switch" className={getToggleClasses()} onChange={handleOnChange} />
+      <label htmlFor="switch">Average price</label>
+    </Field>
+  );
 };
 
 export default Toggle;

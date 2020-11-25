@@ -1,6 +1,6 @@
 import React from "react";
 
-import {StringMap} from "commonlib/utils";
+import { StringMap } from "commonlib/utils";
 
 import "./_index.scss";
 
@@ -14,8 +14,9 @@ const Suggestions: React.FunctionComponent<SuggestionsProps> = (props) => {
   return (
     <ul className="box suggestions">
       {suggestions.map((suggestion, index) => (
-        <li key={index} className="suggestion" onClick={() => props.onSelection(suggestion['symbol'])}>
-          <span className="suggestion--symbol"> {suggestion['symbol']} </span> <span className="suggestion--name">{suggestion['name']}</span>
+        <li key={index} className="suggestion" onClick={() => props.onSelection(suggestion["symbol"])}>
+          <span className="suggestion--symbol"> {suggestion["symbol"]} </span>{" "}
+          <span className="suggestion--name">{suggestion["name"]}</span>
         </li>
       ))}
     </ul>
